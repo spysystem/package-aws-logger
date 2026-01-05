@@ -1,0 +1,76 @@
+##################################################
+# Configuration file for PHPStan
+#
+# https://phpstan.org/user-guide
+# https://phpstan.org/config-reference
+#
+# Run analyze:
+# - vendor/bin/phpstan analyse --memory-limit 4G
+#
+# Run analyze for specific path (file or directory):
+# - vendor/bin/phpstan analyse --memory-limit 4G [PATH]
+#
+# Generate baseline (adjust file name to match level):
+# - vendor/bin/phpstan analyse --memory-limit 4G --allow-empty-baseline --generate-baseline .phpStan/baseline-level-6.neon
+##################################################
+
+includes: []
+	# Include the baseline (remember to generate and use for correct level)
+
+parameters:
+	# Instead of using the CLI option --level, you can save some keystrokes each time you run PHPStan by moving the desired level to the config file.
+	# 0 is the loosest and 9 is the strictest
+	# https://phpstan.org/user-guide/rule-levels
+	level: 9
+
+	# If some of the ignored errors (both from configuration and PHPDocs) do not occur in the result anymore, PHPStan will let you know and you will have to remove the pattern from the configuration.
+	# You can turn off this behaviour by setting reportUnmatchedIgnoredErrors to false in the configuration
+	# https://phpstan.org/user-guide/ignoring-errors#reporting-unused-ignores
+	reportUnmatchedIgnoredErrors: true
+
+	# By default, PHPStan analyses only files with the .php extension. To include other extensions, use the fileExtensions key.
+	fileExtensions:
+		- php
+
+	# PHPStan accepts a list of files and directories on the command line:
+	# You can save some keystrokes each time you run PHPStan by moving the analysed paths to the config file:
+	# Relative paths in the paths key are resolved based on the directory of the config file is in.
+	paths:
+		- src
+
+	# If your codebase contains some files that are broken on purpose (e. g. to test behaviour of your application on files with invalid PHP code), you can exclude them using the excludePaths key. Each entry is used as a pattern for the fnmatch() function.
+	excludePaths:
+		# Exclude from analyzing
+		analyse:
+			- vendor
+		# Exclude from analyzing and discovering symbols
+		analyseAndScan:
+			- .idea
+
+	# If you’re using some other autoloader than the one in Composer, PHPStan can take advantage of it to discover files with autoloaded classes.
+	# Please note that the file with the autoloader will actually be executed by the PHP runtime.
+	bootstrapFiles:
+		- vendor/autoload.php
+
+	# By default, PHPStan stores its cache files in sys_get_temp_dir() . '/phpstan' (usually /tmp/phpstan). You can override this by setting the tmpDir parameter.
+	# Relative path in the tmpDir key is resolved based on the directory of the config file is in. In this example PHPStan cache will be stored in tmp directory that’s next to the configuration file.
+	tmpDir: .phpStan
+
+	# PHPStan runs in multiple threads by default, taking advantage of multiple cores in your CPU. It uses a formula to figure out how many child processes to spawn. The child processes are given “jobs” - each job represents a batch of a certain number of files to process. The inputs to the formula are:
+	# - Auto-detected number of logical CPU cores on your system. If you have 8 physical cores and hyper-threading-enabled CPU, you have 16 logical CPU cores.
+	# - Maximum number of desired spawned processes, to prevent CPU hogging of the whole system if it’s resource-constrained. (maximumNumberOfProcesses)
+	# - Minimum number of jobs per process. Process is spawned only if it will process at least 2 jobs by default. (minimumNumberOfJobsPerProcess)
+	# - Job size - how many files are analysed in a single batch (jobSize)
+	# - Number of analysed files - it’s different each time because of how your codebase changes, and also thanks to the result cache.
+	# https://phpstan.org/config-reference#parallel-processing
+	parallel:
+		jobSize: 5
+		maximumNumberOfProcesses: 5
+		minimumNumberOfJobsPerProcess: 1
+		processTimeout: 300.0
+
+	# You can configure PHPStan to show clickable editor URL leading to the file and line with error in the default table error formatter.
+	# Below doesn't work for Windows 10
+#	editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+	# Below doesn't work for Windows 10, but you can add path to phpstorm64.exe to PATH, copy the "invalid" URL, paste it into a terminal (or Run) and it "works" :/
+#	editorUrl: 'phpstorm64.exe --line %%line%% "%%file%%"'

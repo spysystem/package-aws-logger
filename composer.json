@@ -1,0 +1,41 @@
+{
+	"name": "spysystem/package-aws-logger",
+	"description": "SPY Package AWS Logger",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"phpstan/extension-installer": true
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Spy\\Package\\AwsLogger\\": "src"
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://repo.packagist.com/spysystem/"
+		},
+		{
+			"packagist.org": false
+		}
+	],
+	"require-dev": {
+		"jetbrains/phpstorm-attributes": "^1.0",
+		"phpstan/extension-installer": "^1.4",
+		"phpstan/phpstan": "^2.0",
+		"phpstan/phpstan-strict-rules": "^2.0",
+		"phpunit/phpunit": "^9",
+		"spysystem/code-helper": "~2.0"
+	},
+	"require": {
+		"php": "~8.1.0",
+		"aws/aws-sdk-php": "^3.369.6",
+		"spysystem/package-centralized-logger-data": "dev-mf/116539_entity_field_value as 1.0.0",
+		"spysystem/package-data": "dev-mf/116539_entity_field_value as 1.0.19",
+		"spysystem/package-rest": "dev-mf/116539_entity_field_value as 1.2.10"
+	}
+}

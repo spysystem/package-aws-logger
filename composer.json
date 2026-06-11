@@ -32,7 +32,7 @@
 		"spysystem/code-helper": "~2.0"
 	},
 	"require": {
-		"php": "~8.1.0",
+		"php": "~8.1.0 || ~8.5.0",
 		"aws/aws-sdk-php": "^3.337.3",
 		"spysystem/package-centralized-logger-data": "~1.0.0",
 		"spysystem/package-data": "~1.0.19",

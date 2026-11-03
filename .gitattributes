@@ -1,0 +1,37 @@
+# Default behavior, this will handle all files not found below
+* text eol=lf
+
+# Archives
+*.7z binary
+*.br binary
+*.gz binary
+*.tar binary
+*.zip binary
+
+# Documents
+*.pdf binary
+*.xlsm binary
+*.xlsx binary
+
+# Images
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.psd binary
+*.webp binary
+
+# Fonts
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# Other
+*.eot binary
+*.fla binary
+*.flv binary
+*.mov binary
+*.mp3 binary
+*.mp4 binary
+*.swf binary

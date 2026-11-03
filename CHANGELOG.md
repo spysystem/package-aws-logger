@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+### Notes
+
+- `spysystem/code-helper` raised to `~3.0` (`require-dev` only)
+
 ## 1.1.0
 
 ### Notes

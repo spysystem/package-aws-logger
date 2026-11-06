@@ -27,7 +27,7 @@
 		"phpstan/extension-installer": "^1.4",
 		"phpstan/phpstan": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0",
-		"spysystem/code-helper": "~3.0.2"
+		"spysystem/code-helper": "~3.1.2"
 	},
 	"require": {
 		"php": "~8.5.0",
